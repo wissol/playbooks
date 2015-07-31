@@ -1,7 +1,21 @@
 #####################################
 # Playerbook for Beyond the Wall
+# 
 # by Miguel de Luis
+# GNU
+# Console Version (1.0)
+# July 31st, 2015
+# default characters  only
+#
 #####################################
+#
+# To use:
+#
+# 1. Install Python 3 (any 3.x.x)
+# 2. On the terminal type Python3 default_pb.py
+# or load and run it using Idle
+#
+######################################
 
 # -*- coding:utf8 -*-
 
@@ -13,18 +27,6 @@ from random import choice, randint
 # common functions
 # *********************
 
-def sumlists(x, y):
-        '''Adds the elements of two equally sized lists'''
-        z = []
-        print(x,y)
-        for i in range(0,len(x)): z.append(x[i] + y[i])
-        return z
-
-def d(number_of_dice, faces):
-        ''' A recursive function. 3d6 = d(3, 6) 2d10 = d(2,10)'''
-        if number_of_dice < 1: return 0
-        else: return randint(1, faces) + d(number_of_dice -1, faces)
-
 def ability_bonus(ability):
   ''' assumes ability scores >= 8'''
   if ability < 9: return -1
@@ -33,21 +35,22 @@ def ability_bonus(ability):
   elif ability < 18: return 2
   else: return 3
 
-def get_answer(question, lista):
-
-        x = choice(lista)
-        x[0] = question + "\n\t" + x[0]
-        return x
-
-
-def show_list(lista):
-        for i in range(len(lista)): print(i, lista[i])
-
 def choose_from_list(x):
         ''' display a menu asking user to pick an item from list x '''
         show_list(x)
         y = safe_input_int("Choose from the list by selecting a number: ",len(x) - 1)
         return x[y]
+
+def d(number_of_dice, faces):
+        ''' A recursive function. 3d6 = d(3, 6) 2d10 = d(2,10)'''
+        if number_of_dice < 1: return 0
+        else: return randint(1, faces) + d(number_of_dice -1, faces)
+
+def get_answer(question, lista):
+        ''' chooses an answer from a given list adding the question to the first element to later diplay'''
+        x = choice(lista)
+        x[0] = question + "\n\t" + x[0]
+        return x
 
 def safe_input_int(message, maximo):
   ''' filters input from the user, only allowing integers (numbers) of a given range'''
@@ -57,6 +60,15 @@ def safe_input_int(message, maximo):
     else: return j
   except:
     return safe_input_int(message, maximo)
+
+def sumlists(x, y):
+        '''Adds the elements of two equally sized lists'''
+        z = []
+        for i in range(0, len(x)): z.append(x[i] + y[i])
+        return z
+
+def show_list(lista):
+        for i in range(len(lista)): print(i, lista[i])
 
 def update_stats(x,y):
         ''' x = list containing the data to update  y = string telling what to update'''
@@ -222,12 +234,12 @@ def q5():
                ]
         
         vh = [
-               ["You manned the shield wall in a time of war.", [0,2,0,0,0,0], "spear"],
-               ["The old war hero in town taught you everything he knew.", [2,0,0,0,0,0], "sword"],
-               ["You always led the boar hunts.", [0,2,0,0,0,0], "spear"],
-               ["Chopping wood built your strength.", [0,2,0,0,0,0], "axe"],
-               ["You distinguished yourself in the village levy.", [0,0,2,0,0,0], "long bow"],
-               ["Bad luck taught you everything you know.", [0,0,0,2,0,0], "staff"]
+               ["You manned the shield wall in a time of war.", [0,2,0,0,0,0], "Weapon specialization: spear"],
+               ["The old war hero in town taught you everything he knew.", [2,0,0,0,0,0], "Weapon specialization: sword"],
+               ["You always led the boar hunts.", [0,2,0,0,0,0], "Weapon specialization: spear"],
+               ["Chopping wood built your strength.", [0,2,0,0,0,0], "Weapon specialization: axe"],
+               ["You distinguished yourself in the village levy.", [0,0,2,0,0,0], "Weapon specialization: long bow"],
+               ["Bad luck taught you everything you know.", [0,0,0,2,0,0], "Weapon specialization: staff"]
                 ]
 
         wp = [
@@ -240,18 +252,18 @@ def q5():
                 ]
 
         wbk = [
-                ["Clever swordplay and a quick guard.", [0,0,2,0,0,0], "Longsword"],
-                ["A glorious mounted charge.", [2,0,0,0,0,0], "Lance"],
-                ["Constant and tireless pressure.", [0,2,0,0,0,0], "Mace"],
-                ["Relentless attacks.", [2,0,0,0,0,0], "Battle Axe"],
-                ["Flashy bladework.", [0,0,0,0,0,2], "Longsword"],
-                ["Fierce intimidation and heavy blows.", [0,2,0,0,0,0], "Great Sword"]
+                ["Clever swordplay and a quick guard.", [0,0,2,0,0,0], "Weapon specialization: Longsword"],
+                ["A glorious mounted charge.", [2,0,0,0,0,0], "Weapon specialization: Lance"],
+                ["Constant and tireless pressure.", [0,2,0,0,0,0], "Weapon specialization: Mace"],
+                ["Relentless attacks.", [2,0,0,0,0,0], "Weapon specialization: Battle Axe"],
+                ["Flashy bladework.", [0,0,0,0,0,2], "Weapon specialization: Longsword"],
+                ["Fierce intimidation and heavy blows.", [0,2,0,0,0,0], "Weapon specialization: Great Sword"]
                 ]
         yw = [
-                ["A soulful voice", [0,0,0,0,0,2], "singing"],
+                ["A soulful voice", [0,0,0,0,0,2], "Singing"],
                 ["Simple skills.", [0,0,0,0,2,0], "A trade skill"],
                 ["You collect old lore.", [0,0,0,2,0,0], "Ancient History"],
-                ["A musical gift.", [0,0,0,0,2,0], "play a musical instrument"],
+                ["A musical gift.", [0,0,0,0,2,0], "Play a musical instrument"],
                 ["You are able to work the skins from your kills.", [2,0,0,0,0,0], "Tanning"],
                 ["You make the greatest stews.", [0,0,2,0,0,0], "Cooking"]
                 ]
@@ -372,9 +384,23 @@ def q7():
                 ["For long months she has been tending someone in dangerous pregnancy", [0,0,0,0,2,0], "a lucky charm", "", ""]
                 ]
 
-        wbk = []
+        wbk = [
+                ["You will slay a dragon, and even have a map you think might lead you to one.", [2,0,0,0,0,0], "an old map", "", ""],
+                ["You will be knighted by the king after winning the affection of the common folk.", [0,0,0,0,0,2], "a shining helm", "", ""],
+                ["You will rescue a princess, as in all the old stories, but first you have to find one.", [0,0,0,0,0,2], "a gold threaded tunic", "", ""],
+                ["You will conquer a realm of your own.", [2,0,0,0,0,0], "a noble name", "2", ""],
+                ["You will banish an ancient evil of which you have heard stories.", [0,2,0,0,0,0], "an old scroll", "", ""],
+                ["You will visit distant lands and tirelessly seek adventure along the way.", [0,2,0,0,0,0], "a lodestone", "", ""]
+                ]
 
-        yw = []
+        yw = [
+                ["A hidden cache of money, buried in an iron-bound chest beneath an old oak tree. There was a huge gem within, but you’ve never met anyone with enough silver to buy it.", [0,0,2,0,0,0], "a large ruby", "", ""],
+                ["A deep cave complex with many entrances hidden in a vine-covered stretch of rocky riverside.", [0,0,0,2,0,0], "your own little cave", "", ""],
+                ["Glittering in a lightning-cleft rowan tree, an abandoned, but alluring blade.", [2,0,0,0,0,0], "a magic sword", "", ""],
+                ["An odd friend who knows older roads than you.", [0,0,0,0,0,2], "a strange ally who ofen remains unseen", "", ""],
+                ["Some strange ruins built of foreign stones, long abandoned, but recently reclaimed.", [0,2,0,0,0,0], "a piece of an ancient marble statue", "", ""],
+                ["You stumbled upon the dark heart of the woods. The sky went black, and the tree limbs reached for you.", [0,2,0,0,0,0], "a twisted yew branch", "", ""]
+                ]
 
         answers_dict = {"Self Taught Mage" : stm, "Untested Thief" : ut, "Village Hero" : vh, "Witch's Prentice" : wp, "Would-be Knight": wbk, "Young Woodsman" : yw}
 
@@ -385,11 +411,14 @@ def q7():
 # values (hit points, initiative, ...
 # *****************************************
 
-def get_initiative():
-        x = 1 + ability_bonus(pip[2])
-        if pc_class == "Warrior": x += 1
-        elif pc_class == "Rouge": x += 2
-        return x
+def get_bab():
+        if pc_class == "Warrior": return 1
+        else: return 0
+
+def get_class_abilities():
+        if pc_class == "Warrior": return "Weapon Specialization and Knacks"
+        elif pc_class == "Mage": return "Sense Magic and Spell Casting"
+        else: return "Fortune’s Favor and Highly Skilled"
 
 def get_fortune_points():
         if pc_class == "Rouge": return 5
@@ -402,22 +431,23 @@ def get_hp():
         else: hp += 6
         return hp
 
-def get_bab():
-        if pc_class == "Warrior": return 1
-        else: return 0
-
-def get_class_abilities():
-        if pc_class == "Warrior": return "Weapon Specialization and Knacks"
-        elif pc_class == "Mage": return "Sense Magic and Spell Casting"
-        else: return "Fortune’s Favor and Highly Skilled"
+def get_initiative():
+        x = 1 + ability_bonus(pip[2])
+        if pc_class == "Warrior": x += 1
+        elif pc_class == "Rouge": x += 2
+        return x
 
 def get_silvers():
         silver = d(4,6)
         if reward[3] == "": return silver
-        else: return silver + d(int(reward[3]),6)    
+        else: return silver + d(int(reward[3]),6)
 
-        
+# ------------------------------------------------------------------------------
+
+# ********************
 # main program
+# ********************
+
 types = ["Self Taught Mage", "Untested Thief", "Village Hero", "Witch's Prentice", "Would-be Knight", "Young Woodsman"]
 
 
@@ -443,7 +473,12 @@ classes_dict = {"Village Hero": "Warrior",
                 "Untested Thief": "Rouge",
                 "Witch's Prentice": "Mage",
                 "Would-be Knight": "Warrior",
-                "Young Woodsman": "Rogue"}
+                "Young Woodsman": "Rouge"}
+
+saves_dict = {"Warrior": [14, 17, 15, 17, 16],
+              "Mage": [14, 15, 13, 12, 11],
+              "Rouge":[13, 16, 12, 15, 14]
+              }
 
 knack = ""
 
@@ -484,7 +519,7 @@ update_stats(friends(),99)
 update_stats(q4(), "skills")
 
 if pc_class == "Mage": update_stats(q5(), "magic")
-elif pc_class == "Warrior": update_stats(q5(), "ws")
+elif pc_class == "Warrior": update_stats(q5(), "knack")
 else: update_stats(q5(), "skills")
 
 if pc_class == "Mage": update_stats(q6(), "magic")
@@ -507,18 +542,19 @@ to_hit_melee = bab + ability_bonus(pip[0])
 to_hit_missile = bab + ability_bonus(pip[2])
 hit_points = get_hp()
 
+saves = saves_dict[pc_class]
 
 # print to screen
 
 
 print("\n" + "="*30 + " Background " + "="*30 + "\n")
-print(" "*5,background)
+print(" "*5, background)
 
 print("\n" + "="*30 + " Basic Values " + "="*30 + "\n")
 
 print("STR {}, CON {}, DEX {}, INT {}, WIS {}, CHA {}\n".format(pip[0], pip[1], pip[2], pip[3], pip[4], pip[5]))
 
-print("* Initiative: {}".format(initiative))
+print("* Initiative: ", initiative)
 print("* Armor class: {} + any armour".format(armor_class))
 print("* Fortune points: {}".format(fortune_points))
 print("* Hit points {}".format(hit_points))
@@ -529,16 +565,16 @@ print("* To hit bonus (missile): {} + equipment, etc".format(to_hit_missile))
 
 print("\n" + "="*30 + " Skills " + "="*30 + "\n")
 
-print("*Skills: {}\n*Weapon specialization: {}\n*Knack: {}".format(skills, ws, knack))
-print("*Magic: ", magic)
+print("* Skills: ", skills)
+if pc_class == "Warrior": print("* Knacks: ", knack)
+elif pc_class == "Mage": print("* Magic: ", magic)
 
 print("\n" + "="*30 + " Equipment " + "="*30 + "\n")
 
 print(equipment)
-print("\nSilvers: ", silvers)
+print("\n* Silvers: ", silvers)
 
-
-
-print("Saves: Breath Weapon: 17, Polymorph: 15, Spell: 17, Magic Item:16")
+print("\n" + "="*30 + " Saves " + "="*30 + "\n")
+print("Poison: {} Breath Weapon: {}, Polymorph: {}, Spell: {}, Magic Item: {}".format(saves[0], saves[1], saves[2], saves[3], saves[4]))
 
 
