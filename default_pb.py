@@ -421,20 +421,20 @@ def get_class_abilities():
         else: return "Fortune’s Favor and Highly Skilled"
 
 def get_fortune_points():
-        if pc_class == "Rouge": return 5
+        if pc_class == "Rogue": return 5
         else: return 3
 
 def get_hp():
         hp = ability_bonus(pip[1])
         if pc_class == "Warrior": hp += 10
-        elif pc_class == "Rouge": hp += 8
+        elif pc_class == "Rogue": hp += 8
         else: hp += 6
         return hp
 
 def get_initiative():
         x = 1 + ability_bonus(pip[2])
         if pc_class == "Warrior": x += 1
-        elif pc_class == "Rouge": x += 2
+        elif pc_class == "Rogue": x += 2
         return x
 
 def get_silvers():
@@ -470,14 +470,14 @@ alignments = ["Lawful", "Neutral", "Chaotic"]
 
 classes_dict = {"Village Hero": "Warrior",
                 "Self Taught Mage": "Mage",
-                "Untested Thief": "Rouge",
+                "Untested Thief": "Rogue",
                 "Witch's Prentice": "Mage",
                 "Would-be Knight": "Warrior",
-                "Young Woodsman": "Rouge"}
+                "Young Woodsman": "Rogue"}
 
 saves_dict = {"Warrior": [14, 17, 15, 17, 16],
               "Mage": [14, 15, 13, 12, 11],
-              "Rouge":[13, 16, 12, 15, 14]
+              "Rogue":[13, 16, 12, 15, 14]
               }
 
 knack = ""
